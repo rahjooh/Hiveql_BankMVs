@@ -1,0 +1,8 @@
+create table TestZaman using PARQUET options (path 'hdfs://10.100.136.40:9000/user/hduser/pqTestZaman', "header" "false","delimiter" "|") 
+as select  l.CUSTNO,
+            a.ACCTTYPE,
+            SUM(SUBSTRING(l.REMAININGAMOUNTEFFECTIVE, 0, length(l.REMAININGAMOUNTEFFECTIVE)-1)) as AmountEffective
+    from actinfo a join lastbal97_01 l  on l.CUSTNO = a.CUSTNO
+    where ACCTTYPE ='010' or ACCTTYPE='040'
+    group by l.CUSTNO, a.ACCTTYPE 
+
