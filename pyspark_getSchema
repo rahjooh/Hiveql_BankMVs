@@ -1,0 +1,3 @@
+%livy.pyspark 
+mydf = spark.read.parquet('hdfs://10.100.136.60:9000/user/hduser/pqServat1')
+mydf.printSchema()
