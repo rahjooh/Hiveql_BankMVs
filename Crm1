@@ -1,0 +1,3 @@
+create table Crm1(MerchantNumber string,Label string, Monetary string,Recency string)
+using com.databricks.spark.csv
+options (path 'hdfs://10.100.136.40:9000/user/hduser/Merchants_Information', header "true", "delimiter" "\\t");
