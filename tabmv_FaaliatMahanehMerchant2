@@ -1,0 +1,6 @@
+create table tabmv_FaaliatMahanehMerchant2
+select CRM.MerchantCode , CRM.GuildName, SUBSTR(ba24.FinancialDate,1,5 ) as month ,sum(ba24.Amount) as M , count(ba24.Amount) as F 
+from temp_crm as CRM
+inner join ba24 on Crm.MerchantCode == ba24.MerchantNumber
+where SuccessOrFailure = 'S' and ProcessCode ='000000' and MessageType ='200' and SUBSTR(ba24.FinancialDate,1,5 ) != '94/02'
+group by SUBSTR(ba24.FinancialDate,1,5 ),CRM.MerchantCode , CRM.GuildName
