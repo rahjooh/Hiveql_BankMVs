@@ -1,0 +1,5 @@
+create table 	tabmv_DailyAttachments as
+select LocalOrShetab,TerminalTypeCode ,FinancialDate,SuccessOrFailure, ProcessCode ,StatusCode,MessageType,BillTypeandOrganizationCode,ResponseCode,OperationNo,sum(Amount) as M , count(Amount) as F , sum(Shetabfee) as M_shetabfee , sum(Networkfee) as M_Networkfee 
+, sum(Wage) as M_Wage
+from ba24
+group by LocalOrShetab , TerminalTypeCode , ProcessCode ,MessageType ,SuccessOrFailure ,ResponseCode,BillTypeandOrganizationCode,StatusCode,OperationNo,FinancialDate
