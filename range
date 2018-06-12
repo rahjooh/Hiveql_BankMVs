@@ -1,0 +1,7 @@
+select case
+    when CAST(SUBSTRING(STBAL,0,15 ) as bigint) between 0 and 100000000 then ' 0- 100' 
+    when CAST(SUBSTRING(STBAL,0,15 ) as bigint) between 100000000 and 1000000000 then '100-1000' 
+    when CAST(SUBSTRING(STBAL,0,15 ) as bigint) between 100000000 and 5000000000 then '1000-5000' 
+    when CAST(SUBSTRING(STBAL,0,15 ) as bigint) between 500000000 and 10000000000 then '5000-10000' 
+    when CAST(SUBSTRING(STBAL,0,15 ) as bigint) > 10000000000 then '10000<'  
+    else 'unknown' end as range  from actinfo_ftp_3days	  where ACCTTYPE = 030 and ACSUBTYPE = 053 and HISDATE = '13960727'
