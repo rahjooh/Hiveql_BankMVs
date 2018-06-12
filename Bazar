@@ -1,0 +1,5 @@
+select A.CUSTNO, B.ACCTTYPE, SUM((concat( SUBSTRING(REMAININGAMOUNTEFFECTIVE,Length(REMAININGAMOUNTEFFECTIVE),1) ,SUBSTRING(REMAININGAMOUNTEFFECTIVE,1,
+                          Length(REMAININGAMOUNTEFFECTIVE)-1)))) as AmountEffective from actinfo as B, lastbal97_01 as A where A.CUSTNO =B.CUSTNO  and (ACCTTYPE ='010' or ACCTTYPE='040') group by A.CUSTNO, B.ACCTTYPE order by ACCTTYPE ASC limit 10 ;
+                          
+                          # convert timestamp to date
+                            SELECT TO_DATE(CAST(UNIX_TIMESTAMP('08/26/2016', 'MM/dd/yyyy') AS TIMESTAMP)) AS newdate
