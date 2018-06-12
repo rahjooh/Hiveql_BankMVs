@@ -1,0 +1,9 @@
+%spark.pyspark
+import os,sys
+os.environ['SPARK_HOME'] = "/home/hduser/spark"
+sys.path.append("/home/hduser/spark/python")
+sys.path.append("/home/hduser/spark/python/lib/py4j-0.10.4-src.zip")
+from pyspark.sql.types import StructType,StructField,StringType
+myschema = StructType([StructField("id",StringType(),True),StructField("fname"),True,StructField("lname",StringType(),True),StructField("tel",StringType,True)])
+mydf = spark.read.format("com.databricks.spark.csv").schema(myschema).option("header","false").option("delimiter",",").load("hdfs://10.100.136.40:9000/user/hduser/mytestdata/1.csv")
+mydf.count()
