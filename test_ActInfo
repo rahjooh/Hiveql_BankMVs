@@ -1,0 +1,3 @@
+drop table test_ActInfo;
+create table 	test_ActInfo as 
+select HISDATE,CUSTNO ,ACNO ,ACCTTYPE ,ACSUBTYPE ,STATCD ,STBAL ,OPNBR,DATEOPN from  actinfo_ftp_3days where ACCTTYPE = 030 and ACSUBTYPE = 053
