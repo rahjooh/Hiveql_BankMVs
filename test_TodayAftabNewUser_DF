@@ -1,0 +1,3 @@
+
+create table 	test_TodayAftabNewUser_DF as 
+select CUSTNO from  test_ActInfo where dateopn = '960727'  and custno not in (select Custno from test_ActInfo where hisdate < '960727')
