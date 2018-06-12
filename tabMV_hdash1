@@ -1,0 +1,5 @@
+CREATE TABLE tabMV_hdash1 AS
+select ba24.MerchantNumber,crm.GuildName , crm.GuildCode , crm.CityName , substring(ba24.FinancialDate,0,5) as FinancialMonth, Sum(ba24.Amount) As sumAmount , Count(ba24.TraceNo)as tedadtarakonesh
+from ba24
+INNER JOIN crm ON ba24.MerchantNumber = crm.MerchantCode
+group by ba24.MerchantNumber,crm.GuildName , crm.GuildCode , crm.CityName , substring(ba24.FinancialDate,0,5)
