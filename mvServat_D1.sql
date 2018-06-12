@@ -1,0 +1,1 @@
+CREATE TABLE  IF NOT EXISTS mvServat_D1 (CUSTNO STRING, MANDE_Gharz STRING, MANDE_Kootah STRING, MANDE_Modatdar STRING, ghedmat STRING,tarikh STRING)	using parquet options (path 'hdfs://10.100.136.60:9000/user/hduser/pqServat1')
