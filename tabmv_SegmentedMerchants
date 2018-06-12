@@ -1,0 +1,3 @@
+create table tabmv_SegmentedMerchants as
+select segmentedmerchants.MerchantNumber , segmentedmerchants.F_value,segmentedmerchants.M_value,segmentedmerchants.R_value,segmentedmerchants.Segment ,crm.GuildName , crm.CityName
+from crm inner join segmentedmerchants on crm.MerchantCode =  segmentedmerchants.MerchantNumber
