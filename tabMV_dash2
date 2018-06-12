@@ -1,0 +1,4 @@
+CREATE TABLE tabMV_dash2 AS
+select FinancialDate , SuccessOrFailure , LocalTime  , Sum(Amount) As sumAmount, Count(ba24.TraceNo)as tedadtarakonesh, IssuerBankCode
+from ba24
+group by FinancialDate , SuccessOrFailure , LocalTime , IssuerBankCode
