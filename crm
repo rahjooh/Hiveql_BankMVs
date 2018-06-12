@@ -1,0 +1,3 @@
+create crm(MerchantCode string,TerminalCode string,InstallDate string,CancelDate string,CustomerNo string,AccountNo string,BirthDate string,TerminalCurrentStatusCodeName string,GuildName string,GuildCode string,CityName string,ShaparakAddress string,Fulladdress)
+using PARQUET
+options (path 'hdfs://10.100.136.60:9000/user/hduser/pqTotal', header "true", "delimiter" "|");
