@@ -1,0 +1,2 @@
+create table temp_crm
+select distinct MerchantCode , GuildName from CRM
