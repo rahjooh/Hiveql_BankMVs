@@ -37,8 +37,42 @@ where SUBSTRING(ACNO, 1,2)='02' and HISDATE = "13970103" group by CUSTNO,HISDATE
 
 
 
+select distinct 
+        int(((substring(current_date(),1,4) *365)
+            +(substring(current_date(),6,2) *30.42)
+            + substring(current_date(),9,2)) 
+                                               - 226746.26 
+                                                                - ((substring(concat('13',DATEOPN),1,4) *365 ) 
+                                                                    + (substring(DATEOPN,3,2)*30.42 )
+                                                                    +  substring(DATEOPN,5,2))) as ghedmat
+    ,DATEOPN
+from custinfo97_1
+order by DATEOPN DESC
+limit 1000
 
 
+
+
+select CUSTNO,
+        SUM(SUBSTRING(REMAININGAMOUNTEFFECTIVE, 0, length(REMAININGAMOUNTEFFECTIVE)-1)) as MANDE_GH
+from lastbal97_01 
+where SUBSTRING(ACNO, 1,2)='01' or SUBSTRING(ACNO, 1,2)='03' and HISDATE = '13970101'
+group by CUSTNO ;
+
+
+
+select ((substring('2018-05-20',1,4) *365)
+            +(substring('2018-05-20',6,2) *30.42)
+            + substring('2018-05-20',9,2)) - 226746.26 as milado_days 
+        , ((substring('13970230',1,4) *365)
+            +(substring('13970230',5,2) *30.42)
+            + substring('13970230',7,2)) as shmasi_days1
+        ,((substring(current_date(),1,4) *365)
+            +(substring(current_date(),6,2) *30.42)
+            + substring(current_date(),9,2)) - 226746.26  - 
+         ((substring('13970230',1,4) *365)
+            +(substring('13970230',5,2) *30.42)
+            + substring('13970230',7,2)) as yechizi
 
 
 
