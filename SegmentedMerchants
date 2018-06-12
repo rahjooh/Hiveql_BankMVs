@@ -1,0 +1,3 @@
+create table SegmentedMerchants(id string,fname string,lname string,tel string)
+using com.databricks.spark.csv
+options (path 'hdfs://10.100.136.40:9000/user/hduser/Merchants_Tagged_RFM_139406.csv', header "true", "delimiter" ",");
