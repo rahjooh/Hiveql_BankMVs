@@ -1,0 +1,50 @@
+create table 	mvBaz_step_3 as 
+select a.noe_moshtari ,
+        a.Tahsilat ,
+        a.Jensiat ,
+        a.dtbrth ,
+        tarikh_tarif , 
+        tarikh_eftetah ,
+        RmainingAmounteffective as mandeh ,
+        ltrim(rtrim(c.name)) as name ,
+        a.OPNBR ,
+        ACCSUBTYPE ,
+        ACCTTYPE ,
+        STATCD ,
+        (cast(a.custno as biginit)*3)-711 as shenasaiee ,
+        (cast(substring(acno,2,9)+right(acno,1) as bigint)-987654321) as shenase_hesab
+        
+a.acno ,
+        a.custno ,
+        a.RemainingAmounteffective , 
+        a.OPNBR ,
+        a.DATEOPN as tarikh_eftetah , 
+        c.DATEOPN as tarikh_tarif ,
+        c.dtbrth ,
+        ACCTTYPE , 
+        ACSUBTYPE ,
+        STATCD 
+        case c.sexcode
+            when 'م' then N'مرد'
+            when 'ز' then N'زن'
+            when 'ج' then N'مشترک'
+            else N' ' end Jensiat ,
+        case c.EDUC-LVL 
+            when '1' then N'بیسواد'
+            when '1' then N'ابتدایی'
+            when '1' then N'متوسطه'
+            when '1' then N'دیپلم'
+            when '1' then N'فوق دیپلم'
+            when '1' then N'لیسانس'
+            when '1' then N'فوق لیسانس'
+            when '1' then N'دکترا'
+            else N' ' end Tahsilat ,
+        case c.custype 
+            when '1' then N'حقیقی'
+            when '1' then N'حقوقی'
+            when '1' then N'مشترک'
+            else N' ' end noe_moshtari
+from branch97_1 c join  mvBaz_step_2 a on cast(a.OPNBR as int) = cast(c.Branch as int)
+
+where c.Hisdate =  '970101' 
+order by a.custno
