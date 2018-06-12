@@ -1,0 +1,7 @@
+drop table tabmv_Baz_Cat;
+CREATE TABLE  IF NOT EXISTS tabmv_Baz_Cat(
+    ReportDate string,
+	NoeSepordeh string,
+	Cat string,
+    Tedad string,
+    Mablagh string);
