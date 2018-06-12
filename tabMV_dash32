@@ -1,0 +1,4 @@
+CREATE TABLE tabMV_dash32 AS
+select MerchantNumber , FinancialDate , Sum(Amount) As sumAmount, Count(ba24.TraceNo)as tedadtarakonesh, IssuerBankCode , MessageType
+from ba24
+group by MerchantNumber , FinancialDate , IssuerBankCode , MessageType
