@@ -1,0 +1,12 @@
+create table 	tabmv_DailyAttachments2 as
+select ACNO,CUSTNO,STBAL,LSTSTMT,OPNBR,
+                                                            CASE   
+                                                              WHEN ACCTTYPE = 030 and ACSUBTYPE = 053 THEN 'Aftab'  
+                                                              WHEN  ACCTTYPE = 045 and ACSUBTYPE = 0127  THEN 'Sodmand Online'
+                                                              WHEN  ACCTTYPE = 010 and ACSUBTYPE = 013  THEN 'Bahavar'
+                                                             WHEN ACCTTYPE = 010 and ACSUBTYPE = 013 THEN 'Mehr'
+                                                           END as Cat
+    from actinfo where (ACCTTYPE = 030 and ACSUBTYPE = 053) or
+                        (ACCTTYPE = 045 and ACSUBTYPE = 0127 ) or
+                        (ACCTTYPE = 010 and ACSUBTYPE = 013 ) or 
+                        (ACCTTYPE = 010 and ACSUBTYPE = 013)
