@@ -1,0 +1,2 @@
+CREATE TABLE IF NOT EXISTS mvServat_D12 (CUSTNO STRING, MANDE_Gharz STRING, MANDE_Kootah STRING, MANDE_Modatdar STRING, ghedmat STRING,DATE STRING)  
+USING PARQUET OPTIONS(path 'hdfs://10.100.136.60:9000/user/hduser/pqServat1', 'delimiter' '|','header' 'false') 
