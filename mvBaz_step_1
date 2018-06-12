@@ -1,0 +1,34 @@
+drop table if exists mvBaz_step_1;
+create table mvBaz_step_1 using PARQUET options (path 'hdfs://10.100.136.60:9000/user/hduser/pqMvBaz_step_1', "header" "false","delimiter" "|") as 
+select a.acno ,
+        a.custno ,
+        a.RemainingAmounteffective , 
+        a.OPNBR ,
+        a.DATEOPN as tarikh_eftetah , 
+        c.DATEOPN as tarikh_tarif ,
+        c.dtbrth ,
+        ACCTTYPE , 
+        ACSUBTYPE ,
+        STATCD 
+        case c.sexcode
+            when 'م' then N'مرد'
+            when 'ز' then N'زن'
+            when 'ج' then N'مشترک'
+            else N' ' end Jensiat ,
+        case c.EDUC-LVL 
+            when '1' then N'بیسواد'
+            when '1' then N'ابتدایی'
+            when '1' then N'متوسطه'
+            when '1' then N'دیپلم'
+            when '1' then N'فوق دیپلم'
+            when '1' then N'لیسانس'
+            when '1' then N'فوق لیسانس'
+            when '1' then N'دکترا'
+            else N' ' end Tahsilat ,
+        case c.custype 
+            when '1' then N'حقیقی'
+            when '1' then N'حقوقی'
+            when '1' then N'مشترک'
+            else N' ' end noe_moshtari
+from custinfo97_01 c join  mvBaz_step_1 a on a.custno = c.custno
+where c.DATEOPN <=  '970101' and a.DATEOPN <=  '970101'
