@@ -5,3 +5,7 @@ select case
     when CAST(SUBSTRING(STBAL,0,15 ) as bigint) between 500000000 and 10000000000 then '5000-10000' 
     when CAST(SUBSTRING(STBAL,0,15 ) as bigint) > 10000000000 then '10000<'  
     else 'unknown' end as range  from actinfo_ftp_3days	  where ACCTTYPE = 030 and ACSUBTYPE = 053 and HISDATE = '13960727'
+    
+    ===========================================================
+    
+    select ((select count(ACNO)  from actinfo_ftp_3days	  where ACCTTYPE = 030 and ACSUBTYPE = 053 and HISDATE = '13960727')  - (select count(ACNO)  from actinfo_ftp_3days	  where ACCTTYPE = 030 and ACSUBTYPE = 053 and HISDATE = '13960726' )) / (select count(ACNO)  from actinfo_ftp_3days	  where ACCTTYPE = 030 and ACSUBTYPE = 053 and HISDATE = '13960726' )
