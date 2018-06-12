@@ -1,0 +1,48 @@
+select ((cast (YY as int)*12*30.5)+DayNo+ DD)as CustDayNo,YY, MM,DD from (select CASE  WHEN cast(MM as int)<7 THEN (MM-1)*31 ELSE (MM-1)*30  END as DayNo, YY, MM,DD from  (select substring(DATEOPN,1,2)as YY, substring(DATEOPN,3,2) as MM, substring(DATEOPN,5,6) as DD from custinfo97_01))
+
+select substring(DATEOPN,1,2)as YY, substring(DATEOPN,3,2) as MM, substring(DATEOPN,5,6) as DD from custinfo97_01 
+
+select CUSTNO,
+SUM(concat(SUBSTRING(REMAININGAMOUNTEFFECTIVE, length(REMAININGAMOUNTEFFECTIVE),1),SUBSTRING(REMAININGAMOUNTEFFECTIVE, 1, length(REMAININGAMOUNTEFFECTIVE)-1)))as
+MANDE_BolandModat, ACNO 
+
+select CUSTNO,
+SUM(concat(SUBSTRING(REMAININGAMOUNTEFFECTIVE, length(REMAININGAMOUNTEFFECTIVE),1),SUBSTRING(REMAININGAMOUNTEFFECTIVE, 1, length(REMAININGAMOUNTEFFECTIVE)-1)))as MANDE_KotahModat, ACNO 
+from lastbal97_01 where SUBSTRING(ACNO, 1,2)='02' group by CUSTNO, ACNO order by ACNO DESC;
+
+select CUSTNO,
+SUM(concat(SUBSTRING(REMAININGAMOUNTEFFECTIVE, length(REMAININGAMOUNTEFFECTIVE),1),SUBSTRING(REMAININGAMOUNTEFFECTIVE, 1, length(REMAININGAMOUNTEFFECTIVE)-1)))as MANDE_GH, ACNO 
+from lastbal97_01 where SUBSTRING(ACNO, 1,2)='01' or SUBSTRING(ACNO, 1,2)='03' group by CUSTNO, ACNO order by ACNO DESC;
+
+select CUSTNO,(sum(SUBSTRING(REMAININGAMOUNTEFFECTIVE, 1, length(REMAININGAMOUNTEFFECTIVE)-1))/90) as Avg_MANDE_KotahModat
+from lastbal97_01 where SUBSTRING(ACNO, 1,2)='02'  and  HISDATE BETWEEN '13961030' and '13970131' group by CUSTNO;
+
+select MAX(TDate) as TDate, CUSTNO from (select max(HISDATE) as TDate, ACNO,CUSTNO, REMAININGAMOUNTEFFECTIVE from lastbal97_01 
+group by ACNO,CUSTNO, REMAININGAMOUNTEFFECTIVE) group by CUSTNO;
+
+select (cast(substring(FDate,1,4) as int)* 365)+((cast(substring(FDate,5,2) as int)-1)* 30)+cast(substring(FDate,7,2) as int) as DayFDate, FDate,
+       (cast(substring(TDate,1,4) as int)* 365)+((cast(substring(TDate,5,2) as int)-1)* 30)+cast(substring(TDate,7,2) as int) as DayTDate, TDate from (select  case when cast(MM as int)-3 <=0 then concat(cast(YY as int)-1,cast(MM as int)+9,DD) else concat(YY,'0',cast(MM as int)-3,DD) end as FDate, TDate,CUSTNO from (select CUSTNO,TDate,substring(TDate,1,4) as YY,
+substring(TDate, 5,2) as MM, substring(TDate,7,2) as DD  from (select MAX(TDate) as TDate, CUSTNO from (select max(HISDATE) as TDate, ACNO,CUSTNO, REMAININGAMOUNTEFFECTIVE from lastbal97_01 
+group by ACNO,CUSTNO, REMAININGAMOUNTEFFECTIVE) group by CUSTNO)));
+
+select CUSTNO, Avg(SUBSTRING(REMAININGAMOUNTEFFECTIVE, 1, length(REMAININGAMOUNTEFFECTIVE)-1)) as Avg_MANDE_KotahModat from (select  case when cast(MM as int)-3 <=0 then concat(cast(YY as int)-1,cast(MM as int)+9,DD) else concat(YY,'0',cast(MM as int)-3,DD) end as FDate, TDate from (select TDate,substring(TDate,1,4) as YY,
+substring(TDate, 5,2) as MM, substring(TDate,7,2) as DD  from (select max(HISDATE) as TDate, ACNO,CUSTNO, REMAININGAMOUNTEFFECTIVE from lastbal97_01))) where SUBSTRING(ACNO, 1,2)='02' and HISDATE BETWEEN FDate and TDate group by CUSTNO ;
+
+select distinct HISDATE from (select CUSTNO, SUM(SUBSTRING(REMAININGAMOUNTEFFECTIVE, 0, length(REMAININGAMOUNTEFFECTIVE)-1)) as MANDE_Modatdar,HISDATE
+from lastbal97_01 where (SUBSTRING(ACNO, 1,2)='04' or SUBSTRING(ACNO, 1,2)='08') and HISDATE = '13970103' group by CUSTNO ,HISDATE)
+
+select distinct select CUSTNO, SUM(SUBSTRING(REMAININGAMOUNTEFFECTIVE, 0, length(REMAININGAMOUNTEFFECTIVE)-1)) as MANDE_Kootah,HISDATE from lastbal97_01
+where SUBSTRING(ACNO, 1,2)='02' and HISDATE = "13970103" group by CUSTNO,HISDATE 
+
+
+
+
+
+
+
+
+
+
+
+
+
