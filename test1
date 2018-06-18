@@ -1,0 +1,16 @@
+CREATE TABLE  IF NOT EXISTS mvServat_D22 (
+          CUSTNO STRING,
+          MandehGharz STRING,
+          MandehKootah STRING,
+          MandehModatdar STRING, 
+          ghedmat STRING,
+          tarikh STRING
+          )	using parquet options (path 'hdfs://10.100.136.60:9000/user/hduser/pqServat1')
+         
+         
+refresh table mvservat_d1 ;
+
+
+select count(*),tarikh from mvservat_d1 group by tarikh
+
+drop table mvservat_d22
